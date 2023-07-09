@@ -1,0 +1,22 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "dive to reactjs world",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karthikRaiker/namaste-react.git"
+  },
+  "keywords": [
+    "reactjs"
+  ],
+  "author": "karthik raikar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karthikRaiker/namaste-react/issues"
+  },
+  "homepage": "https://github.com/karthikRaiker/namaste-react#readme"
+}
