@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import Test from "./Test";
+import axios from "axios";
+import { Rating } from "react-simple-star-rating";
 
 /*
 * -Header
@@ -123,33 +126,71 @@ const Header = () => (
   </div>
 );
 
-const RestroCard = ({ name, cruisine, img, star }) => (
+const RestroCard = ({ brand, price, thumbnail, rating }) => (
   <div className="restro-card">
     <div className="restro-card-img">
-      <img src={img} alt={name} />
+      <img src={thumbnail} alt={brand} />
     </div>
     <div className="restro-card-content">
-      <div>{name}</div>
-      <div>{cruisine.join(",")}</div>
-      <div>{star} Star</div>
+      <div>{brand}</div>
+      <div>${price}</div>
+      <div>{rating} Star</div>
     </div>
   </div>
 );
 
-const Body = () => (
-  <div className="Body">
-    <div className="searchbar">
-      <input type="text" placeholder="search restaurants.." />
+const Body = () => {
+  const [products, setProducts] = useState([]);
+  const [rating, setRating] = useState(0);
+  const [filterData, setFilterData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const { data } = await axios.get("https://dummyjson.com/products/");
+    setProducts(data?.products);
+  };
+
+  const filterOnRating = useMemo(() => {
+    products.filter((product) => product.rating === rating, [products, rating]);
+  });
+
+  const handleRating = (rate) => {
+    setRating(rate);
+  };
+  const handleReset = () => {
+    // Set the initial value
+    setRating(0);
+  };
+  return (
+    <div className="Body">
+      {console.log(filterOnRating)}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Rating onClick={handleRating} initialValue={rating} />
+        <button onClick={handleReset}>reset</button>
+      </div>
+
+      <div className="searchbar">
+        <input type="text" placeholder="search restaurants.." />
+      </div>
+      <div className="restro-cardlist">
+        {products.length > 0
+          ? products.map((product) => (
+              <RestroCard key={product?.id} {...product} />
+            ))
+          : null}
+      </div>
     </div>
-    <div className="restro-cardlist">
-      {restaurantData.length > 0
-        ? restaurantData.map((restaurant) => (
-            <RestroCard key={restaurant?.id} {...restaurant} />
-          ))
-        : null}
-    </div>
-  </div>
-);
+  );
+};
 
 const Footer = () => (
   <div className="footer">
