@@ -49,7 +49,7 @@ const Body = () => {
 
   const handleClear = () => setSearchText("");
 
-  return restaurantData.length === 0 ? (
+  return restaurantData?.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="Body">
