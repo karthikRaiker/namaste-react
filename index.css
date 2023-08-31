@@ -42,10 +42,22 @@ a {
   display: flex;
   justify-content: center;
 }
+.searchBox-Container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
 .searchBox {
   padding: 0.5rem 1rem;
   border: 1px solid #333;
   border-radius: 5px 0 0 5px;
+}
+.crossBtn {
+  position: absolute;
+  color: red;
+  cursor: pointer;
+  right: 1rem;
+  top: 0.5rem;
 }
 .restro-cardlist {
   display: flex;
@@ -124,4 +136,16 @@ a {
   height: 210px;
   background-color: lightgray;
   margin: 20px;
+}
+.RestaurantMenuContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  align-items: center;
+  margin: 1rem;
+}
+.RestaurantMenuContainer > div > div {
+  margin: 1rem 0;
+  color: brown;
+  font-weight: bold;
 }

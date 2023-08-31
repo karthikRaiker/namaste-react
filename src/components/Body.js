@@ -3,6 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [searchText, setSearchText] = useState();
@@ -20,7 +21,6 @@ const Body = () => {
   }, [searchText]);
 
   const handleSearch = (searchText, restaurantData) => {
-    console.log("trigger");
     return restaurantData.filter((restaurant) =>
       restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
     );
@@ -55,13 +55,7 @@ const Body = () => {
   ) : (
     <div className="Body">
       <div className="searchbar">
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            position: "relative",
-          }}
-        >
+        <div className="searchBox-Container">
           <input
             className="searchBox"
             type="text"
@@ -69,16 +63,7 @@ const Body = () => {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <span
-            style={{
-              position: "absolute",
-              right: "1rem",
-              top: "0.5rem",
-              color: "red",
-              cursor: "pointer",
-            }}
-            onClick={handleClear}
-          >
+          <span className="crossBtn" onClick={handleClear}>
             X
           </span>
         </div>
@@ -96,8 +81,19 @@ const Body = () => {
       </div>
       <div className="restro-cardlist">
         {filterData?.length > 0 ? (
-          filterData.map((restaurantData, index) => {
-            return <RestaurantCard key={index} {...restaurantData?.info} />;
+          filterData.map((restaurantData) => {
+            console.log(restaurantData);
+            return (
+              <Link
+                key={restaurantData?.info?.id}
+                to={
+                  "restaurant-menu/" +
+                  restaurantData?.info?.feeDetails?.restaurantId
+                }
+              >
+                <RestaurantCard {...restaurantData?.info} />
+              </Link>
+            );
           })
         ) : (
           <div>No Restaurant match your Filter! {searchText}</div>
