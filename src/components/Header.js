@@ -1,13 +1,14 @@
 import "../../index.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Title = () => (
-  <a href="/" className="Logo">
+  <Link to="/" className="Logo">
     <img
       src="https://png.pngtree.com/png-vector/20190328/ourmid/pngtree-food-logo-designs-with-spoon-and-fork-png-image_879863.jpg"
       alt="img"
     />
-  </a>
+  </Link>
 );
 
 const Header = () => {
@@ -17,9 +18,17 @@ const Header = () => {
     <div className="Header">
       <Title />
       <ul>
-        <li>Home</li>
-        <li>About Us</li>
-        <li>Contact</li>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          {" "}
+          <Link to="/about">About Us</Link>
+        </li>
+        <li>
+          {" "}
+          <Link to="/contact">Contact Us</Link>
+        </li>
         <li>Cart</li>
       </ul>
       <button

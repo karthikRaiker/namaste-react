@@ -1,5 +1,5 @@
 import RestaurantCard from "./RestaurantCard";
-import { restaurantData } from "../constant";
+// import { restaurantData } from "../constant";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Shimmer from "./Shimmer";
@@ -49,6 +49,7 @@ const Body = () => {
 
   const handleClear = () => setSearchText("");
 
+  // if (!restaurantData) return null;
   return restaurantData?.length === 0 ? (
     <Shimmer />
   ) : (
